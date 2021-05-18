@@ -42,6 +42,14 @@ public class ClientService {
         return new ClientDTO(client);
     }
 
+    @Transactional
+    public ClientDTO update(Long id, ClientDTO dto) {
+        Client client = repository.getOne(id);
+        client = copyDtoToEntity(dto, client);
+
+        return new ClientDTO(client);
+    }
+
     private Client copyDtoToEntity(ClientDTO dto, Client entity) {
         entity.setName(dto.getName());
         entity.setCpf(dto.getCpf());
@@ -51,5 +59,4 @@ public class ClientService {
 
         return entity;
     }
-
 }
